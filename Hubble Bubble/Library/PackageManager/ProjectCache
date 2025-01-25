@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638733875320594513
-    m_Hash: 3300297288
+      ticks: 638733962396578904
+    m_Hash: 2015667677
   m_LockFileStatus:
     m_FilePath: C:/Users/Jedkl/OneDrive/Documents/GitHub/HubbleBubble/Hubble Bubble/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638733875320659570
-    m_Hash: 284828341
+      ticks: 638733962396588826
+    m_Hash: 8274474
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
