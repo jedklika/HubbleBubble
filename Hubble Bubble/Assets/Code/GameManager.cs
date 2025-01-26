@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,6 +39,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Transform respawnPoint;
     [SerializeField] Transform player;
+
+    [SerializeField] List<GameObject> inPlayer = new List<GameObject>();
+    [SerializeField] bool hasWon;
+    [SerializeField] float maxTime;
+
+    UI um;
  
     public float MaxCarryCap
     {
@@ -85,15 +93,30 @@ public class GameManager : MonoBehaviour
         get { return plasticAmount; } 
         set { plasticAmount = value; }
     }
+    public int MaxPlasticAmount
+    {
+        get { return maxPlasticAmount; }
+        set { maxPlasticAmount = value; }
+    }
     public int MetalAmount
     {
         get { return metalAmount; }
         set { metalAmount = value; }
     }
+    public int MaxMetalAmount
+    {
+        get { return maxMetalAmount; }
+        set { maxMetalAmount = value; }
+    }
     public int GlassAmount
     {
         get { return glassAmount; }
         set { glassAmount = value; }
+    }
+    public int MaxGlassAmount
+    {
+        get { return maxGlassAmount; }
+        set { maxGlassAmount = value; }
     }
 
     public string BubbleType 
@@ -157,8 +180,23 @@ public class GameManager : MonoBehaviour
         set { plasticSpeedBuff = value; }
     }
 
+    public List <GameObject> InPlayer 
+    { 
+        get { return inPlayer; }
+
+        set { inPlayer = value; }
+    }
+
+    public bool Won 
+    { 
+        get { return hasWon; }
+
+        set { hasWon = value; }
+    }
+
     private void Start()
     {
+        um = FindObjectOfType<UI>();
         respawnPoint = GameObject.Find("Respawn Point").transform;
         player = GameObject.Find("Player").transform;
         StartCoroutine(deathTimer());
@@ -170,21 +208,27 @@ public class GameManager : MonoBehaviour
         { 
             case "Glass":
                 maxCarryCap = glassMaxCarryBuff;
+                um.GlassActive();
                     break;
             case "Metal":
                 maxCarryCap = metalMaxCarryCap;
+                um.MetalActive();
                 break;
             case "Plastic":
                 maxCarryCap = plasticMaxCarryCap;
+                um.PlasticActive();
                 break;
             default:
+                um.CarriedItems.text = "0 /";
+                um.BubbleType.color = Color.white;
+                um.MaxCarryCap.text = "0";
                 break;
         }
         if (durability <= 0) 
         {
             Respawn();
         }
-        if(lives <= 0) 
+        if(lives <= 0 && !hasWon) 
         {
             Die();
         }
@@ -200,6 +244,7 @@ public class GameManager : MonoBehaviour
         if(glassAmount == maxGlassAmount && metalAmount == maxMetalAmount && plasticAmount == maxPlasticAmount) 
         {
             Debug.Log("Win");
+            hasWon = true;
         }
     }
      public void Respawn() 
@@ -226,6 +271,7 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
+            
             yield return new WaitForSeconds(lifeTime);
             Respawn();
         }
@@ -244,5 +290,4 @@ public class GameManager : MonoBehaviour
     {
         glassAmount = glassAmount + itemsCarried;
     }
-
 }

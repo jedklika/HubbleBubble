@@ -314,6 +314,7 @@
 "Assets/Code/Obstacles.cs"
 "Assets/Code/PlayerMovement.cs"
 "Assets/Code/ThirdPersonCam.cs"
+"Assets/Code/UI.cs"
 -langversion:9.0
 /deterministic
 /optimize+

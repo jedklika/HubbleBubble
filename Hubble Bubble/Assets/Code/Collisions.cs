@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Collisions : MonoBehaviour
 {
     GameManager gm;
+    UI um;
+    
     public int hits;
     private void Start()
     {
         gm = FindObjectOfType<GameManager>();
+        um = FindObjectOfType<UI>();
     }
     private void Update()
     {
@@ -21,92 +26,122 @@ public class Collisions : MonoBehaviour
     {
         if(other.tag == "Glass" && !gm.Assigned) 
         {
-            gm.ItemsCarried++;
+            
+            um.AddCarryItems();
+            gm.InPlayer.Add(other.gameObject);
             gm.Speed = gm.Speed - gm.GlassSpeedDebuff;
             gm.BubbleType = "Glass";
             gm.Assigned = true;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         else if (other.tag == "Glass" && gm.BubbleType == "Glass" && !gm.Full)
         {
+            
+            um.AddCarryItems();
+            gm.InPlayer.Add(other.gameObject);
             gm.Speed = gm.Speed - gm.GlassSpeedDebuff;
             gm.BubbleType = "Glass";
             gm.Assigned = true;
-            gm.ItemsCarried++;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         else if ( gm.BubbleType == "Glass" && other.tag == "Dump")
         {
+            um.DisposeGlass();
+            DiposeObjectsInPlayer();
             gm.AddGlass();
             gm.Durability--;
         }
         else if(gm.BubbleType == "Glass" && other.tag != "Glass" && other.tag != "Dump") 
         {
+            RestoreObjectsInPlayer();
             Debug.Log("Die");
             gm.Durability--;
             
         }
         else if (other.tag == "Metal" && !gm.Assigned)
         {
-            gm.ItemsCarried++;
+            um.AddCarryItems();
+            gm.InPlayer.Add(other.gameObject);
             gm.Lives = gm.Lives + 1;
             gm.Speed = gm.Speed - gm.MetalSpeedDeBuff;
             gm.BubbleType = "Metal";
             gm.Assigned = true;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         else if (other.tag == "Metal" && gm.BubbleType == "Metal" && !gm.Full)
         {
+            um.AddCarryItems();
+            gm.InPlayer.Add(other.gameObject);
             gm.Speed = gm.Speed - gm.MetalSpeedDeBuff;
             gm.BubbleType = "Metal";
             gm.Assigned = true;
-            gm.ItemsCarried++;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         else if (gm.BubbleType == "Metal" && other.tag == "Dump")
         {
+            um.DisposeMetal();
+            DiposeObjectsInPlayer();
             gm.AddMetal();
             gm.Respawn();
         }
-        else if (gm.BubbleType == "Metal" && other.tag != "Metal")
+        else if (gm.BubbleType == "Metal" && other.tag != "Metal" && other.tag != "Dump")
         {
+            RestoreObjectsInPlayer();
             Debug.Log("Die2");
             gm.Durability--;
             
         }
         else if (other.tag == "Plastic" && !gm.Assigned)
         {
-            gm.ItemsCarried++;
+            um.AddCarryItems();
+            gm.InPlayer.Add(other.gameObject);
             gm.Speed = gm.Speed + gm.PlasticSpeedBuff;
             gm.BubbleType = "Plastic";
             gm.Assigned = true;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         else if (other.tag == "Plastic" && gm.BubbleType == "Plastic" && !gm.Full)
         {
+            um.AddCarryItems();
+            gm.InPlayer.Add(other.gameObject);
             gm.BubbleType = "Plastic";
             gm.Speed = gm.Speed + gm.PlasticSpeedBuff;
             gm.Assigned = true;
-            gm.ItemsCarried++;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         else if (gm.BubbleType == "Plastic" && other.tag == "Dump")
         {
+            um.DisposePlastic();
+            DiposeObjectsInPlayer();
             gm.AddPlastic();
             gm.Durability--;
         }
-        else if (gm.BubbleType == "Plastic" && other.tag != "Plastic")
+        else if (gm.BubbleType == "Plastic" && other.tag != "Plastic" && other.tag != "Dump")
         {
+            RestoreObjectsInPlayer();
             Debug.Log("Die3");
             gm.Durability--;
             
         }
         else if (gm.Full)
         {
+            RestoreObjectsInPlayer();
             Debug.Log("Die4");
             gm.Durability--;
            
         }
 
+    }
+    public void DiposeObjectsInPlayer()
+    {
+        gm.InPlayer.Clear();
+    }
+    public void RestoreObjectsInPlayer() 
+    { 
+        foreach(GameObject item in gm.InPlayer) 
+        {
+            item.SetActive(true);
+        }
+        gm.InPlayer.Clear();
     }
 }

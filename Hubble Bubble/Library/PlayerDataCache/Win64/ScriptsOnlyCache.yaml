@@ -120,51 +120,51 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1578}
+      Script: {instanceID: 1604}
     - Class: 114
-      Script: {instanceID: 1750}
+      Script: {instanceID: 1776}
     - Class: 114
-      Script: {instanceID: 1982}
+      Script: {instanceID: 2008}
     - Class: 114
-      Script: {instanceID: 2200}
+      Script: {instanceID: 2226}
     - Class: 114
-      Script: {instanceID: 2294}
+      Script: {instanceID: 2320}
     - Class: 114
-      Script: {instanceID: 2562}
+      Script: {instanceID: 2588}
     - Class: 114
-      Script: {instanceID: 2628}
+      Script: {instanceID: 2654}
     - Class: 114
-      Script: {instanceID: 2696}
+      Script: {instanceID: 2722}
     - Class: 114
-      Script: {instanceID: 2838}
+      Script: {instanceID: 2864}
     - Class: 114
-      Script: {instanceID: 3178}
+      Script: {instanceID: 3204}
     - Class: 114
-      Script: {instanceID: 4168}
+      Script: {instanceID: 4194}
     - Class: 114
-      Script: {instanceID: 4436}
+      Script: {instanceID: 4462}
     - Class: 114
-      Script: {instanceID: 4814}
+      Script: {instanceID: 4840}
     - Class: 114
-      Script: {instanceID: 5104}
+      Script: {instanceID: 5130}
     - Class: 114
-      Script: {instanceID: 5174}
+      Script: {instanceID: 5200}
     - Class: 114
-      Script: {instanceID: 5614}
+      Script: {instanceID: 5640}
     - Class: 114
-      Script: {instanceID: 5722}
+      Script: {instanceID: 5748}
     - Class: 114
-      Script: {instanceID: 5752}
+      Script: {instanceID: 5778}
     - Class: 114
-      Script: {instanceID: 5932}
+      Script: {instanceID: 5958}
     - Class: 114
-      Script: {instanceID: 6256}
+      Script: {instanceID: 6282}
     - Class: 114
-      Script: {instanceID: 6564}
+      Script: {instanceID: 6590}
     - Class: 114
-      Script: {instanceID: 7912}
+      Script: {instanceID: 7938}
     - Class: 114
-      Script: {instanceID: 41490}
+      Script: {instanceID: 8066}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1056,7 +1056,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 3da5e742e2fcc69f6b7bbb8426c54d38
+      Hash: 5465bbb3cd5b86ec4e949b3d0587a5a9
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: GameManager
@@ -1320,6 +1320,12 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
+      Hash: 0734d333186ee7d79d8928c721142f90
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Dump
+  - hash:
+      serializedVersion: 2
       Hash: 00eef92bf387da2c9009267123d9d674
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -1332,10 +1338,10 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 0734d333186ee7d79d8928c721142f90
+      Hash: 3808a12c54a2c5f1d26c9b19c6957715
     assemblyName: Assembly-CSharp
     namespaceName: 
-    className: Dump
+    className: UI
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

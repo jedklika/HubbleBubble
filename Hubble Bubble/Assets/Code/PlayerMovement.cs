@@ -23,12 +23,14 @@ public class PlayerMovement : MonoBehaviour
 
     GameManager GM;
 
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         GM = FindObjectOfType<GameManager>();
+        
     }
 
     // Update is called once per frame
