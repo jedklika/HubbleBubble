@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] float moveSpeed;
 
     [SerializeField] float verticalSpeed;
 
@@ -22,11 +21,14 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    GameManager GM;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        GM = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -60,16 +62,16 @@ public class PlayerMovement : MonoBehaviour
     {
         movedirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        rb.AddForce(movedirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        rb.AddForce(movedirection.normalized * GM.Speed * 10f, ForceMode.Force);
     }
 
     void SpeedControl() 
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        if (flatVel.magnitude > moveSpeed) 
+        if (flatVel.magnitude > GM.Speed) 
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            Vector3 limitedVel = flatVel.normalized * GM.Speed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
