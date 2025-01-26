@@ -20,7 +20,7 @@ public class UI : MonoBehaviour
     [SerializeField] TextMeshProUGUI maxCarryCap;
 
     [Header("Health")]
-    [SerializeField] Image[] health;
+    [SerializeField] GameObject[] health;
 
     [Header("Slider")]
     [SerializeField] Slider timer;
@@ -83,7 +83,7 @@ public class UI : MonoBehaviour
         set { maxCarryCap = value; }
     }
 
-    public Image[] Health 
+    public GameObject[] Health 
     { 
         get { return health; }
         
@@ -107,12 +107,14 @@ public class UI : MonoBehaviour
         glassAmout.text = "0";
         metalAmout.text = "0";
         plasticAmout.text = "0";
+        timer.maxValue = gm.LifeTime;
+        timer.value = gm.LifeCurrTime;
 
     }
 
     private void Update()
     {
-        
+        timer.value = gm.LifeCurrTime;
     }
 
     public void GlassActive() 

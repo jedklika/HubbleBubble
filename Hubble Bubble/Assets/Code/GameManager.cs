@@ -194,12 +194,17 @@ public class GameManager : MonoBehaviour
         set { hasWon = value; }
     }
 
+    public float LifeCurrTime;
+    private bool _waitingForRespawn;
+
     private void Start()
     {
         um = FindObjectOfType<UI>();
         respawnPoint = GameObject.Find("Respawn Point").transform;
         player = GameObject.Find("Player").transform;
-        StartCoroutine(deathTimer());
+        _waitingForRespawn = true;
+        LifeCurrTime = LifeTime;
+        //StartCoroutine(deathTimer());
        
     }
     private void Update()
@@ -246,6 +251,15 @@ public class GameManager : MonoBehaviour
             Debug.Log("Win");
             hasWon = true;
         }
+        if (_waitingForRespawn)
+        {
+            LifeCurrTime -= Time.deltaTime;
+            if (LifeCurrTime < 0.0f)
+            {
+                _waitingForRespawn = false;
+                Respawn();             
+            }
+        }
     }
      public void Respawn() 
     {
@@ -259,7 +273,18 @@ public class GameManager : MonoBehaviour
         itemsCarried = 0;
         maxCarryCap = 1;
         assigned = false;
-        StartCoroutine(deathTimer());
+        _waitingForRespawn = true;
+        LifeCurrTime = LifeTime;
+        //StartCoroutine(deathTimer());
+
+        for (int i = um.Health.Length-1; i >= 0; i++)
+        {
+            if (um.Health[i].gameObject.activeSelf)
+            {
+                um.Health[i].gameObject.SetActive(false);
+                break;
+            }
+        }
         Debug.Log("Respawned");
     }
     public void Die() 
@@ -267,15 +292,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Die");
         SceneManager.LoadScene(0);
     }
-    IEnumerator deathTimer() 
-    {
-        while (true)
-        {
-            
-            yield return new WaitForSeconds(lifeTime);
-            Respawn();
-        }
-    }
+    //IEnumerator deathTimer() 
+    //{
+    //        yield return new WaitForSeconds(lifeTime);
+    //        Respawn();
+    //}
     public void AddPlastic()
     {
         plasticAmount = plasticAmount + itemsCarried;

@@ -62,7 +62,7 @@ public class Collisions : MonoBehaviour
         {
             um.AddCarryItems();
             gm.InPlayer.Add(other.gameObject);
-            gm.Lives = gm.Lives + 1;
+            gm.LifeCurrTime += 5;
             gm.Speed = gm.Speed - gm.MetalSpeedDeBuff;
             gm.BubbleType = "Metal";
             gm.Assigned = true;
@@ -72,6 +72,7 @@ public class Collisions : MonoBehaviour
         {
             um.AddCarryItems();
             gm.InPlayer.Add(other.gameObject);
+            gm.LifeCurrTime += 5;
             gm.Speed = gm.Speed - gm.MetalSpeedDeBuff;
             gm.BubbleType = "Metal";
             gm.Assigned = true;
