@@ -54,7 +54,7 @@ public class Collisions : MonoBehaviour
         else if(gm.BubbleType == "Glass" && other.tag != "Glass" && other.tag != "Dump") 
         {
             RestoreObjectsInPlayer();
-            Debug.Log("Die");
+
             gm.Durability--;
             
         }
@@ -83,7 +83,7 @@ public class Collisions : MonoBehaviour
             um.DisposeMetal();
             DiposeObjectsInPlayer();
             gm.AddMetal();
-            gm.Respawn();
+            gm.Durability--;
         }
         else if (gm.BubbleType == "Metal" && other.tag != "Metal" && other.tag != "Dump")
         {

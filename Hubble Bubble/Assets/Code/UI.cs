@@ -20,7 +20,7 @@ public class UI : MonoBehaviour
     [SerializeField] TextMeshProUGUI maxCarryCap;
 
     [Header("Health")]
-    [SerializeField] GameObject[] health;
+    [SerializeField] RawImage[] health;
 
     [Header("Slider")]
     [SerializeField] Slider timer;
@@ -83,7 +83,7 @@ public class UI : MonoBehaviour
         set { maxCarryCap = value; }
     }
 
-    public GameObject[] Health 
+    public RawImage[] Health
     { 
         get { return health; }
         
@@ -156,5 +156,21 @@ public class UI : MonoBehaviour
         int combinedTotal;
         combinedTotal = gm.PlasticAmount + gm.ItemsCarried;
         plasticAmout.text = combinedTotal.ToString();
+    }
+
+    public void UpadeHealthUI() 
+    {
+        for (int i = 0; i < Health.Length; i++)
+        {
+            if (i < gm.Lives) 
+            { 
+                Health[i].enabled = true; 
+            }
+            else 
+            {
+                health[i].enabled = false;
+            }
+            
+        }
     }
 }

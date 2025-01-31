@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] int durability;
     [SerializeField] int lives;
+    [SerializeField] int maxLives;
     [SerializeField] float lifeTime;
 
     [SerializeField] int plasticAmount;
@@ -232,6 +233,7 @@ public class GameManager : MonoBehaviour
         if (durability <= 0) 
         {
             Respawn();
+            um.UpadeHealthUI();
         }
         if(lives <= 0 && !hasWon) 
         {
@@ -276,15 +278,6 @@ public class GameManager : MonoBehaviour
         _waitingForRespawn = true;
         LifeCurrTime = LifeTime;
         //StartCoroutine(deathTimer());
-
-        for (int i = um.Health.Length-1; i >= 0; i++)
-        {
-            if (um.Health[i].gameObject.activeSelf)
-            {
-                um.Health[i].gameObject.SetActive(false);
-                break;
-            }
-        }
         Debug.Log("Respawned");
     }
     public void Die() 
